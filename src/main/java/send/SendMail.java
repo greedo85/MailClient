@@ -24,10 +24,12 @@ public class SendMail {
     private BodyPart bodyPart;
     private DataSource dataSource;
     private Scanner scanner;
+    private char choice;
+
     public SendMail() {
         scanner = new Scanner(System.in);
-        bodyPart =new MimeBodyPart();
-        multipart=new MimeMultipart();
+        bodyPart = new MimeBodyPart();
+        multipart = new MimeMultipart();
     }
 
     public void setConnection( String host ) {
@@ -44,8 +46,10 @@ public class SendMail {
             }
         });
     }
+
     public void sendMessage( String to, String from, String title ) throws MessagingException {
-        internetAddress = new InternetAddress(from);
+        internetAddress = new InternetAddress();
+        internetAddress.setAddress(from);
         mimeMessage = new MimeMessage(session);
         message = mimeMessage;
         message.setFrom(internetAddress);
@@ -54,24 +58,39 @@ public class SendMail {
         String msg = "";
         System.out.println("Wpisz wiadomość");
         String line;
-        while (!(line = scanner.nextLine() + "\n").equals("koniec\n")) {
+        while (!(line = scanner.nextLine() + "\n").equals("wyslij\n")) {
             msg += line;
         }
         bodyPart.setText(msg);
         multipart.addBodyPart(bodyPart);
-        System.out.println("Wysłać załącznik? ");
-        addAttachmentFile("c:/mailtest/doc.pdf");
-
+        menu();
         message.setContent(multipart);
-
         Transport.send(message);
         System.out.println("wysłałem wiadomość");
     }
 
-    public void addAttachmentFile(String fileName) throws MessagingException {
-        bodyPart =new MimeBodyPart();
-        dataSource=  new FileDataSource(fileName);
-        bodyPart.setDataHandler(new DataHandler( dataSource));
+    private void menu() throws MessagingException {
+        System.out.println("Wysłać załącznik? ");
+        System.out.println("y - tak");
+        System.out.println("n - nie");
+        choice=scanner.next().charAt(0);
+        switch (choice) {
+            case 'y':
+                System.out.println("podaj pełną ściażkę do pliku:");
+                scanner.nextLine();
+                String filename = scanner.nextLine();
+                addAttachmentFile(filename);
+                break;
+            case 'n':
+                break;
+
+        }
+    }
+
+    public void addAttachmentFile( String fileName ) throws MessagingException {
+        bodyPart = new MimeBodyPart();
+        dataSource = new FileDataSource(fileName);
+        bodyPart.setDataHandler(new DataHandler(dataSource));
         bodyPart.setFileName(fileName);
         multipart.addBodyPart(bodyPart);
     }

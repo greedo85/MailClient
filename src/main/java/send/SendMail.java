@@ -8,6 +8,10 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.Struct;
 import java.util.Properties;
 import java.util.Scanner;
 
@@ -24,10 +28,13 @@ public class SendMail {
     private BodyPart bodyPart;
     private DataSource dataSource;
     private Scanner scanner;
+    private char choice;
+    private boolean isValid;
+
     public SendMail() {
         scanner = new Scanner(System.in);
-        bodyPart =new MimeBodyPart();
-        multipart=new MimeMultipart();
+        bodyPart = new MimeBodyPart();
+        multipart = new MimeMultipart();
     }
 
     public void setConnection( String host ) {
@@ -44,8 +51,10 @@ public class SendMail {
             }
         });
     }
+
     public void sendMessage( String to, String from, String title ) throws MessagingException {
-        internetAddress = new InternetAddress(from);
+        internetAddress = new InternetAddress();
+        internetAddress.setAddress(from);
         mimeMessage = new MimeMessage(session);
         message = mimeMessage;
         message.setFrom(internetAddress);
@@ -54,24 +63,52 @@ public class SendMail {
         String msg = "";
         System.out.println("Wpisz wiadomość");
         String line;
-        while (!(line = scanner.nextLine() + "\n").equals("koniec\n")) {
+        while (!(line = scanner.nextLine() + "\n").equals("wyslij\n")) {
             msg += line;
         }
         bodyPart.setText(msg);
         multipart.addBodyPart(bodyPart);
-        System.out.println("Wysłać załącznik? ");
-        addAttachmentFile("c:/mailtest/doc.pdf");
+        do {
+            menu();
 
+        } while (!isValid);
         message.setContent(multipart);
-
         Transport.send(message);
         System.out.println("wysłałem wiadomość");
     }
 
-    public void addAttachmentFile(String fileName) throws MessagingException {
-        bodyPart =new MimeBodyPart();
-        dataSource=  new FileDataSource(fileName);
-        bodyPart.setDataHandler(new DataHandler( dataSource));
+    private boolean menu() throws MessagingException {
+        System.out.println("Wysłać załącznik? ");
+        System.out.println("y - tak");
+        System.out.println("n - nie");
+        choice = scanner.next().charAt(0);
+        switch (choice) {
+
+            case 'y':
+                System.out.println("podaj pełną ścieżkę do pliku:");
+                scanner.nextLine();
+                String filename;
+                filename = scanner.nextLine();
+                File file = new File(filename);
+                if (file.exists()) {
+                    addAttachmentFile(filename);
+                    System.out.println("załączyłem plik");
+                    isValid = true;
+                } else {
+                    System.out.println("Zła nazwa pliku");
+                    isValid = false;
+                }
+                break;
+            case 'n':
+                isValid = true;
+        }
+        return isValid;
+    }
+
+    public void addAttachmentFile( String fileName ) throws MessagingException {
+        bodyPart = new MimeBodyPart();
+        dataSource = new FileDataSource(fileName);
+        bodyPart.setDataHandler(new DataHandler(dataSource));
         bodyPart.setFileName(fileName);
         multipart.addBodyPart(bodyPart);
     }

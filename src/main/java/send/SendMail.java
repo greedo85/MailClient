@@ -104,7 +104,7 @@ public class SendMail {
         }
         return isValid;
     }
-
+/*trzeba zrobić przechowywanie wielu bodyPart czyli dodawanie wielu załączników*/
     public void addAttachmentFile( String fileName ) throws MessagingException {
         bodyPart = new MimeBodyPart();
         dataSource = new FileDataSource(fileName);

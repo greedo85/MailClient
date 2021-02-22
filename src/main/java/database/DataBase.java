@@ -11,7 +11,6 @@ public class DataBase {
     private Statement statement;
     private DatabaseMetaData databaseMetaData;
 
-
     public void createConnection( String dbName ) throws SQLException {
 
         connection = DriverManager.getConnection("jdbc:sqlite:" + dbName);

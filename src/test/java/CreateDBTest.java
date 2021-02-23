@@ -8,7 +8,7 @@ import static org.junit.Assert.assertTrue;
 
 public class CreateDBTest {
     @Test
-    public void createTest() throws SQLException, IllegalAccessException, InstantiationException, ClassNotFoundException {
+    public void createTest() throws SQLException {
         //given
         DataBase dataBase=new DataBase();
         //when

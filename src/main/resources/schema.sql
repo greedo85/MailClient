@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS mail
 (
-    id int PRIMARY_KEY,
+    id int PRIMARY_KEY AUTOINCREMENT,
     sent_from INT NOT NULL,
     subject TEXT,
     date TEXT NOT NULL UNIQUE,
@@ -11,9 +11,8 @@ CREATE TABLE IF NOT EXISTS mail
     FOREIGN KEY (sent_to) REFERENCES address (id)
 )
 
-
 CREATE TABLE IF NOT EXISTS address
 (
-    id INT PRIMARY_KEY NOT NULL,
-    mail_address TEXT NOT NULL
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    mail_address TEXT NOT NULL UNIQUE
 )

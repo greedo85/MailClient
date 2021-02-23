@@ -18,6 +18,7 @@ public class AddToDBTest {
         addressManager.add(address2);
         //then
         AddressManager addressManager1=new AddressManager();
+        System.out.println(addressManager1.getByMail("test@test.pl"));
         assertEquals(addressManager1.getByMail("test@test.pl"),address1);
     }
 }

@@ -23,13 +23,15 @@ public class AddressManager extends DataBase implements RepositoryInterface<Addr
 
     @Override
     public Address getByMail( String mail ) {
-        TypedQuery <Address> query= (TypedQuery<Address>) getEntityManager().createQuery("SELECT id, mailAddress FROM Address WHERE mailAddress=:email").setParameter("email",mail);
+        TypedQuery <Address> query=  getEntityManager().createQuery("FROM Address WHERE mailAddress=:mail_address",Address.class).setParameter("mail_address",mail);
         Address address1=  query.getSingleResult();
         return address1;
     }
 
     @Override
     public List getAll() {
-        return null;
+        Query query=getEntityManager().createQuery("FROM Address",Address.class);
+        List<Address>addresses= query.getResultList();
+        return addresses;
     }
 }

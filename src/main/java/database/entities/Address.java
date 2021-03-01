@@ -1,22 +1,17 @@
 package database.entities;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
+@Data
 @NoArgsConstructor
-@Getter
-@Table(name="address")
-@EqualsAndHashCode
-@ToString
 public class Address {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name="mail_address")
@@ -25,4 +20,6 @@ public class Address {
     public Address( String mailAddress ) {
         this.mailAddress = mailAddress;
     }
+    @ManyToMany(mappedBy = "addressList")
+    List<Mail> mailList;
 }

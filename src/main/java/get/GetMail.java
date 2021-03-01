@@ -41,7 +41,7 @@ public class GetMail {
         properties.put("mail.pop3.port", String.valueOf(port));
         properties.put("mail.pop3.starttls.enable", "true");
         session = Session.getDefaultInstance(properties);
-        store = session.getStore("impas");
+        store = session.getStore("imaps");
         store.connect(host, user, password);
 
     }
@@ -70,6 +70,8 @@ public class GetMail {
                     }
                 }
             }
+            System.out.println("From: "+addresses[0]);
+            System.out.println("Date: "+sendDate);
         }
 
     }

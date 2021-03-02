@@ -1,7 +1,9 @@
+import database.controller.MailAddressController;
 import database.entities.Address;
-import database.entities.AddressManager;
+import database.controller.AddressController;
 import database.entities.Mail;
-import database.entities.MailManager;
+import database.controller.MailController;
+import database.entities.MailAddress;
 import org.junit.Test;
 
 import java.time.LocalDateTime;
@@ -16,20 +18,20 @@ public class EntityTest {
         Address address1=new Address("test@test.pl");
         Address address2=new Address("abc@abc.pl");
         //when
-        AddressManager addressManager=new AddressManager();
-        addressManager.add(address1);
-        addressManager.add(address2);
+        AddressController addressController =new AddressController();
+        addressController.add(address1);
+        addressController.add(address2);
         //then
-        System.out.println(addressManager.getByMail("test@test.pl"));
-        assertEquals(addressManager.getByMail("test@test.pl"),address1);
+        System.out.println(addressController.getByMail("test@test.pl"));
+        assertEquals(addressController.getByMail("test@test.pl"),address1);
     }
 
     @Test
     public void findAllAddressesTest() {
 
         //given
-        AddressManager addressManager=new AddressManager();
-        System.out.println( addressManager.getAll());
+        AddressController addressController =new AddressController();
+        System.out.println( addressController.getAll());
     }
 
     @Test
@@ -37,11 +39,27 @@ public class EntityTest {
     {
         //given
         String date=LocalDateTime.now().toString();
-        AddressManager addressManager=new AddressManager();
-        Address address=addressManager.getById(3);
-        MailManager mailManager=new MailManager();
+        AddressController addressController =new AddressController();
+        Address address= addressController.getById(3);
+        MailController mailController =new MailController();
         Mail mail =new Mail("Temat2", date, "odebrana","kolejna", address);
         //when
-        mailManager.add(mail);
+        mailController.add(mail);
+    }
+
+    @Test
+    public void mailAddressTest()
+    {
+        //given
+        AddressController addressController =new AddressController();
+        Address address1= addressController.getById(3);
+        Address address2= addressController.getById(1);
+        MailController mailController =new MailController();
+        Mail mail= mailController.getById(3);
+        MailAddress mailAddress=new MailAddress(mail,address1);
+        MailAddressController mailAddressController=new MailAddressController();
+        //when
+        mailAddressController.add(mailAddress);
+
     }
 }

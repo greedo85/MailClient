@@ -1,13 +1,15 @@
-package database.entities;
+package database.controller;
 
 import database.DataBase;
+import database.entities.Address;
+import database.entities.RepositoryInterface;
 
 
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
-public class AddressManager extends DataBase implements RepositoryInterface<Address> {
+public class AddressController extends DataBase implements RepositoryInterface<Address> {
     @Override
     public void add( Address address ) {
         getEntityManager().getTransaction().begin();

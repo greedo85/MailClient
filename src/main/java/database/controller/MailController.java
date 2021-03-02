@@ -1,10 +1,12 @@
-package database.entities;
+package database.controller;
 
 import database.DataBase;
+import database.entities.Mail;
+import database.entities.RepositoryInterface;
 
 import java.util.List;
 
-public class MailManager extends DataBase implements RepositoryInterface<Mail>{
+public class MailController extends DataBase implements RepositoryInterface<Mail> {
     @Override
     public void add( Mail mail ) {
         getEntityManager().getTransaction().begin();
@@ -14,7 +16,7 @@ public class MailManager extends DataBase implements RepositoryInterface<Mail>{
 
     @Override
     public Mail getById( int id ) {
-        return null;
+        return getEntityManager().find(Mail.class,id);
     }
 
     @Override

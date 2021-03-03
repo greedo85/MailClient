@@ -9,9 +9,6 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.sql.Struct;
 import java.util.Properties;
 import java.util.Scanner;
 

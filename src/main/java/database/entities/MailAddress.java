@@ -1,14 +1,15 @@
 package database.entities;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
 @Table(name = "mail_address")
+@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 public class MailAddress {
 
     @Id
@@ -26,5 +27,14 @@ public class MailAddress {
     public MailAddress( Mail mail, Address address ) {
         this.mail = mail;
         this.address = address;
+    }
+
+    @Override
+    public String toString() {
+        return "MailAddress{" +
+                "id=" + id +
+                ", mail=" + mail +
+                ", address=" + address +
+                '}';
     }
 }

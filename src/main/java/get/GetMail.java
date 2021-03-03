@@ -23,7 +23,7 @@ public class GetMail {
     private MimeBodyPart mimeBodyPart;
     private Scanner scanner;
     private File file;
-
+    
 
     private final String user;
     private final String password;

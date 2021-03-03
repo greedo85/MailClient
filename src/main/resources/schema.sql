@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS mail
   (
      id INTEGER PRIMARY KEY AUTOINCREMENT,
      id_mail INTEGER NOT NULL,
-     id_address INTEGER NOT NULL,
+     id_address INTEGER NOT NULL UNIQUE,
      FOREIGN KEY (id_mail) REFERENCES mail(id),
      FOREIGN KEY (id_address) REFERENCES address(id)
   )

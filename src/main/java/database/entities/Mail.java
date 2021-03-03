@@ -1,6 +1,7 @@
 package database.entities;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -9,9 +10,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Data
 @Table(name="mail")
 @NoArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 public class Mail {
 
     @Id
@@ -49,5 +50,18 @@ public class Mail {
         this.type = type;
         this.content = content;
         this.sentFrom = sentFrom;
+    }
+
+    @Override
+    public String toString() {
+        return "Mail{" +
+                "id=" + id +
+                ", subject='" + subject + '\'' +
+                ", localDateTime='" + localDateTime + '\'' +
+                ", type='" + type + '\'' +
+                ", content='" + content + '\'' +
+                ", sentFrom=" + sentFrom +
+                ", addressList=" + addressList +
+                '}';
     }
 }

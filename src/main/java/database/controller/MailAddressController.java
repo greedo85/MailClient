@@ -18,7 +18,7 @@ public class MailAddressController extends DataBase implements RepositoryInterfa
 
     @Override
     public MailAddress getById( int id ) {
-        return null;
+        return getEntityManager().find(MailAddress.class,id);
     }
 
     @Override

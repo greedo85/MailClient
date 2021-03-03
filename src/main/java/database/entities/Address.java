@@ -6,8 +6,10 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 public class Address {
 
     @Id
@@ -22,4 +24,13 @@ public class Address {
     }
     @ManyToMany(mappedBy = "addressList")
     List<Mail> mailList;
+
+    @Override
+    public String toString() {
+        return "Address{" +
+                "id=" + id +
+                ", mailAddress='" + mailAddress + '\'' +
+                ", mailList=" + mailList +
+                '}';
+    }
 }

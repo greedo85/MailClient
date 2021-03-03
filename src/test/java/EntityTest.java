@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import java.time.LocalDateTime;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 public class EntityTest {
     @Test
@@ -42,7 +42,7 @@ public class EntityTest {
         AddressController addressController =new AddressController();
         Address address= addressController.getById(3);
         MailController mailController =new MailController();
-        Mail mail =new Mail("Temat2", date, "odebrana","kolejna", address);
+        Mail mail =new Mail("Temat2", date, "odebrana","testowa treść", address);
         //when
         mailController.add(mail);
     }
@@ -55,11 +55,16 @@ public class EntityTest {
         Address address1= addressController.getById(3);
         Address address2= addressController.getById(1);
         MailController mailController =new MailController();
-        Mail mail= mailController.getById(3);
-        MailAddress mailAddress=new MailAddress(mail,address1);
+        Mail mail1= mailController.getById(3);
+        Mail mail2= mailController.getById(4);
+        MailAddress mailAddress1=new MailAddress(mail1,address2);
+        MailAddress mailAddress2=new MailAddress(mail2,address1);
         MailAddressController mailAddressController=new MailAddressController();
         //when
-        mailAddressController.add(mailAddress);
-
+        mailAddressController.add(mailAddress1);
+        mailAddressController.add(mailAddress2);
+        //then
+        assertEquals(mailAddressController.getById(23).getAddress(),address2);
+        assertEquals(mailAddressController.getById(23).getMail(),mail1);
     }
 }

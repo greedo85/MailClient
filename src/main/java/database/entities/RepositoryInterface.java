@@ -6,7 +6,8 @@ public interface RepositoryInterface <T> {
 
     void add(T t);
     T getById(int id);
-    T getByMail( String address);
+    T getByString( String address);
+    List getByText(String text);
     List getAll();
 
 }

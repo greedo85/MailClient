@@ -24,10 +24,15 @@ public class AddressController extends DataBase implements RepositoryInterface<A
     }
 
     @Override
-    public Address getByMail( String mail ) {
+    public Address getByString( String mail ) {
         TypedQuery <Address> query=  getEntityManager().createQuery("FROM Address WHERE mailAddress=:mail_address",Address.class).setParameter("mail_address",mail);
         Address address1=  query.getSingleResult();
         return address1;
+    }
+
+    @Override
+    public List getByText( String text ) {
+        return null;
     }
 
     @Override

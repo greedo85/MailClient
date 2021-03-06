@@ -1,7 +1,6 @@
 package database.controller;
 
 import database.DataBase;
-import database.entities.Address;
 import database.entities.MailAddress;
 import database.entities.RepositoryInterface;
 
@@ -22,7 +21,12 @@ public class MailAddressController extends DataBase implements RepositoryInterfa
     }
 
     @Override
-    public MailAddress getByMail( String address ) {
+    public MailAddress getByString( String address ) {
+        return null;
+    }
+
+    @Override
+    public List getByText( String text ) {
         return null;
     }
 

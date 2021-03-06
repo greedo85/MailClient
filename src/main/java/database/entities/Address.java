@@ -4,12 +4,14 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
+
 public class Address {
 
     @Id
@@ -27,10 +29,9 @@ public class Address {
 
     @Override
     public String toString() {
-        return "Address{" +
-                "id=" + id +
-                ", mailAddress='" + mailAddress + '\'' +
+        return "Address[" +
+                "mailAddress='" + mailAddress + '\'' +
                 ", mailList=" + mailList +
-                '}';
+                ']';
     }
 }

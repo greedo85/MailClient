@@ -7,6 +7,9 @@ import database.entities.MailAddress;
 import org.junit.Test;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.junit.Assert.*;
 
@@ -22,8 +25,8 @@ public class EntityTest {
         addressController.add(address1);
         addressController.add(address2);
         //then
-        System.out.println(addressController.getByMail("test@test.pl"));
-        assertEquals(addressController.getByMail("test@test.pl"),address1);
+        System.out.println(addressController.getByString("test@test.pl"));
+        assertEquals(addressController.getByString("test@test.pl"),address1);
     }
 
     @Test
@@ -66,5 +69,21 @@ public class EntityTest {
         //then
         assertEquals(mailAddressController.getById(23).getAddress(),address2);
         assertEquals(mailAddressController.getById(23).getMail(),mail1);
+    }
+
+    @Test
+    public void findMailByString()
+    {
+        //given
+        MailController mailController=new MailController();
+        String subject="Temat";
+
+        //when
+        List<Mail> mailList= mailController.getAll();
+        Stream<Mail>mailStream=mailList.stream();
+        List<Mail>findBySubject=mailStream.filter(m->m.getSubject().contains(subject)).collect(Collectors.toList());
+        System.out.println(mailList);
+        //then
+        //assertEquals(3,mailList.size());
     }
 }

@@ -1,18 +1,16 @@
 package database.entities;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name="mail")
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
+@Getter
 public class Mail {
 
     @Id
@@ -54,14 +52,12 @@ public class Mail {
 
     @Override
     public String toString() {
-        return "Mail{" +
-                "id=" + id +
-                ", subject='" + subject + '\'' +
+        return "Mail[" +
+                "subject='" + subject  +
                 ", localDateTime='" + localDateTime + '\'' +
                 ", type='" + type + '\'' +
                 ", content='" + content + '\'' +
                 ", sentFrom=" + sentFrom +
-                ", addressList=" + addressList +
-                '}';
+                ']';
     }
 }

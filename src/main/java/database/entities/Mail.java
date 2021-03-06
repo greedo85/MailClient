@@ -1,10 +1,7 @@
 package database.entities;
-
 import lombok.*;
-
 import javax.persistence.*;
 import java.util.List;
-import java.util.Objects;
 
 @Entity
 @Table(name="mail")
@@ -52,12 +49,13 @@ public class Mail {
 
     @Override
     public String toString() {
-        return "Mail[" +
-                "subject='" + subject  +
+        return "Mail{" +
+                "id=" + id +
+                ", subject='" + subject + '\'' +
                 ", localDateTime='" + localDateTime + '\'' +
                 ", type='" + type + '\'' +
                 ", content='" + content + '\'' +
                 ", sentFrom=" + sentFrom +
-                ']';
+                '}';
     }
 }

@@ -29,9 +29,9 @@ public class Address {
 
     @Override
     public String toString() {
-        return "Address[" +
-                "mailAddress='" + mailAddress + '\'' +
-                ", mailList=" + mailList +
-                ']';
+        return "Address{" +
+                "id=" + id +
+                ", mailAddress='" + mailAddress + '\'' +
+                '}';
     }
 }

@@ -8,7 +8,7 @@ import java.util.List;
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 @Getter
-public class Mail {
+public class Email {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,7 +28,7 @@ public class Mail {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="sent_from", referencedColumnName="id")
-    private Address sentFrom;
+    private EmailAddress sentFrom;
 
     @ManyToMany
     @JoinTable(
@@ -37,9 +37,9 @@ public class Mail {
             inverseJoinColumns = @JoinColumn(name="id_address", referencedColumnName = " id")
 
     )
-    private List<Address>addressList;
+    private List<EmailAddress> emailAddressList;
 
-    public Mail( String subject, String localDateTime, String type, String content, Address sentFrom ) {
+    public Email( String subject, String localDateTime, String type, String content, EmailAddress sentFrom ) {
         this.subject = subject;
         this.localDateTime = localDateTime;
         this.type = type;
@@ -49,7 +49,7 @@ public class Mail {
 
     @Override
     public String toString() {
-        return "Mail{" +
+        return "Email{" +
                 "id=" + id +
                 ", subject='" + subject + '\'' +
                 ", localDateTime='" + localDateTime + '\'' +

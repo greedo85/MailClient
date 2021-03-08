@@ -1,35 +1,36 @@
 package database.entities;
 
 import lombok.*;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Objects;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
-
-public class Address {
+@Table(name="address")
+public class EmailAddress {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name="mail_address")
+    @Column(name="mail_address", unique = true)
+    @Cascade(org.hibernate.annotations.CascadeType.MERGE)
     private String mailAddress;
 
-    public Address( String mailAddress ) {
+    public EmailAddress( String mailAddress ) {
         this.mailAddress = mailAddress;
     }
-    @ManyToMany(mappedBy = "addressList")
-    List<Mail> mailList;
+    @ManyToMany(mappedBy = "emailAddressList")
+    List<Email> emailList;
 
     @Override
     public String toString() {
-        return "Address{" +
+        return "EmailAddress{" +
                 "id=" + id +
                 ", mailAddress='" + mailAddress + '\'' +
                 '}';

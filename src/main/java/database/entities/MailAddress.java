@@ -18,23 +18,23 @@ public class MailAddress {
 
     @OneToOne
     @JoinColumn(name = "id_mail", referencedColumnName = "id")
-    private Mail mail;
+    private Email email;
 
     @OneToOne
     @JoinColumn(name = "id_address", referencedColumnName = "id")
-    private Address address;
+    private EmailAddress emailAddress;
 
-    public MailAddress( Mail mail, Address address ) {
-        this.mail = mail;
-        this.address = address;
+    public MailAddress( Email email, EmailAddress emailAddress ) {
+        this.email = email;
+        this.emailAddress = emailAddress;
     }
 
     @Override
     public String toString() {
         return "MailAddress{" +
                 "id=" + id +
-                ", mail=" + mail +
-                ", address=" + address +
+                ", email=" + email +
+                ", emailAddress=" + emailAddress +
                 '}';
     }
 }

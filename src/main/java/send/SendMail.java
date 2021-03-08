@@ -48,7 +48,7 @@ public class SendMail {
             }
         });
     }
-
+/*zmienić na listę odbiorców*/
     public void sendMessage( String to, String from, String title ) throws MessagingException {
         internetAddress = new InternetAddress();
         internetAddress.setAddress(from);
@@ -67,7 +67,6 @@ public class SendMail {
         multipart.addBodyPart(bodyPart);
         do {
             menu();
-
         } while (!isValid);
         message.setContent(multipart);
         Transport.send(message);
